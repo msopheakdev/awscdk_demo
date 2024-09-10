@@ -1,0 +1,114 @@
+{
+  "version": "36.0.24",
+  "artifacts": {
+    "ProsethEC2Stack.assets": {
+      "type": "cdk:asset-manifest",
+      "properties": {
+        "file": "ProsethEC2Stack.assets.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+      }
+    },
+    "ProsethEC2Stack": {
+      "type": "aws:cloudformation:stack",
+      "environment": "aws://025066243530/ap-southeast-1",
+      "properties": {
+        "templateFile": "ProsethEC2Stack.template.json",
+        "terminationProtection": false,
+        "validateOnSynth": false,
+        "assumeRoleArn": "arn:${AWS::Partition}:iam::025066243530:role/cdk-hnb659fds-deploy-role-025066243530-ap-southeast-1",
+        "cloudFormationExecutionRoleArn": "arn:${AWS::Partition}:iam::025066243530:role/cdk-hnb659fds-cfn-exec-role-025066243530-ap-southeast-1",
+        "stackTemplateAssetObjectUrl": "s3://cdk-hnb659fds-assets-025066243530-ap-southeast-1/4626989e2ebaa068c8ac9d44e9cd5e38fbfc4aa82985686179070bbee29d16df.json",
+        "requiresBootstrapStackVersion": 6,
+        "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version",
+        "additionalDependencies": [
+          "ProsethEC2Stack.assets"
+        ],
+        "lookupRole": {
+          "arn": "arn:${AWS::Partition}:iam::025066243530:role/cdk-hnb659fds-lookup-role-025066243530-ap-southeast-1",
+          "requiresBootstrapStackVersion": 8,
+          "bootstrapStackVersionSsmParameter": "/cdk-bootstrap/hnb659fds/version"
+        }
+      },
+      "dependencies": [
+        "ProsethEC2Stack.assets"
+      ],
+      "metadata": {
+        "/ProsethEC2Stack/Subnet": [
+          {
+            "type": "aws:cdk:warning",
+            "data": "No routeTableId was provided to the subnet 'subnet-07164b20e01cfc5ea'. Attempting to read its .routeTable.routeTableId will return null/undefined. (More info: https://github.com/aws/aws-cdk/pull/3171) [ack: @aws-cdk/aws-ec2:noSubnetRouteTableId]",
+            "trace": [
+              "Annotations.addMessage (/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/jsii-kernel-5AX86J/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1608)",
+              "Annotations.addWarningV2 (/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/jsii-kernel-5AX86J/node_modules/aws-cdk-lib/core/lib/annotations.js:1:825)",
+              "new ImportedSubnet (/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/jsii-kernel-5AX86J/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:34578)",
+              "Subnet.fromSubnetAttributes (/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/jsii-kernel-5AX86J/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:22562)",
+              "/private/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/tmpdh9ddst_/lib/program.js:8895:152",
+              "Kernel._Kernel_ensureSync (/private/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/tmpdh9ddst_/lib/program.js:9499:24)",
+              "Kernel.sinvoke (/private/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/tmpdh9ddst_/lib/program.js:8895:102)",
+              "KernelHost.processRequest (/private/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/tmpdh9ddst_/lib/program.js:10715:36)",
+              "KernelHost.run (/private/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/tmpdh9ddst_/lib/program.js:10675:22)",
+              "Immediate._onImmediate (/private/var/folders/6m/9gprbwhj20q424nm9_n_8dkh0000gn/T/tmpdh9ddst_/lib/program.js:10676:46)",
+              "process.processImmediate (node:internal/timers:476:21)"
+            ]
+          }
+        ],
+        "/ProsethEC2Stack/MySecurityGroup/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "MySecurityGroupAC8D442C"
+          }
+        ],
+        "/ProsethEC2Stack/ProsethEC2Instance/InstanceRole/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProsethEC2InstanceInstanceRole6EE4635B"
+          }
+        ],
+        "/ProsethEC2Stack/ProsethEC2Instance/InstanceProfile": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProsethEC2InstanceInstanceProfileA9C590B5"
+          }
+        ],
+        "/ProsethEC2Stack/ProsethEC2Instance/Resource": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "ProsethEC2Instance7F2D58E7"
+          }
+        ],
+        "/ProsethEC2Stack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+          }
+        ],
+        "/ProsethEC2Stack/CDKMetadata/Default": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CDKMetadata"
+          }
+        ],
+        "/ProsethEC2Stack/BootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "BootstrapVersion"
+          }
+        ],
+        "/ProsethEC2Stack/CheckBootstrapVersion": [
+          {
+            "type": "aws:cdk:logicalId",
+            "data": "CheckBootstrapVersion"
+          }
+        ]
+      },
+      "displayName": "ProsethEC2Stack"
+    },
+    "Tree": {
+      "type": "cdk:tree",
+      "properties": {
+        "file": "tree.json"
+      }
+    }
+  }
+}

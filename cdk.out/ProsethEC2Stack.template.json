@@ -1,0 +1,167 @@
+{
+ "Resources": {
+  "MySecurityGroupAC8D442C": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "Allow all inbound and outbound traffic",
+    "GroupName": "AllowAllTraffic",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all inbound traffic",
+      "IpProtocol": "-1"
+     },
+     {
+      "CidrIpv6": "::/0",
+      "Description": "Allow all inbound traffic",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": "vpc-02e5fc702984b6cbd"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ProsethEC2Stack/MySecurityGroup/Resource"
+   }
+  },
+  "ProsethEC2InstanceInstanceRole6EE4635B": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "ProsethEC2Instance1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ProsethEC2Stack/ProsethEC2Instance/InstanceRole/Resource"
+   }
+  },
+  "ProsethEC2InstanceInstanceProfileA9C590B5": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "Roles": [
+     {
+      "Ref": "ProsethEC2InstanceInstanceRole6EE4635B"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "ProsethEC2Stack/ProsethEC2Instance/InstanceProfile"
+   }
+  },
+  "ProsethEC2Instance7F2D58E7": {
+   "Type": "AWS::EC2::Instance",
+   "Properties": {
+    "AvailabilityZone": "ap-southeast-1a",
+    "BlockDeviceMappings": [
+     {
+      "DeviceName": "/dev/xvda",
+      "Ebs": {
+       "VolumeSize": 9,
+       "VolumeType": "gp3"
+      }
+     }
+    ],
+    "IamInstanceProfile": {
+     "Ref": "ProsethEC2InstanceInstanceProfileA9C590B5"
+    },
+    "ImageId": {
+     "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    "InstanceType": "t3.micro",
+    "KeyName": "mylinuxkeypair",
+    "SecurityGroupIds": [
+     {
+      "Fn::GetAtt": [
+       "MySecurityGroupAC8D442C",
+       "GroupId"
+      ]
+     }
+    ],
+    "SubnetId": "subnet-07164b20e01cfc5ea",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "ProsethEC2Instance1"
+     }
+    ],
+    "UserData": {
+     "Fn::Base64": "#!/bin/bash\n        yum update -y\n        amazon-linux-extras install nginx1 -y\n        systemctl start nginx\n        systemctl enable nginx\n        echo \"Hello Proseth and AWS Event\" > /usr/share/nginx/html/index.html\n        "
+    }
+   },
+   "DependsOn": [
+    "ProsethEC2InstanceInstanceRole6EE4635B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "ProsethEC2Stack/ProsethEC2Instance/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/1WNQQ6CMBBFz8K+jIIhHsCFcUfgAGasQxyBlkzbENL07gaUhav/895PfglFdYZjhrPL9bPPB35AbD3qXjXkbBBNCmd3j6RLiC3pIOyXq9gwqUtn/sHNOI9G02r2nhTjCLGxw4b33HUttuOBUlphjYIjeZJt+btPql78y5rDCYoCquztmHMJxvNI0HzzA3k9W5HGAAAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "ProsethEC2Stack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}

@@ -1,0 +1,20 @@
+{
+  "version": "36.0.24",
+  "files": {
+    "4626989e2ebaa068c8ac9d44e9cd5e38fbfc4aa82985686179070bbee29d16df": {
+      "source": {
+        "path": "ProsethEC2Stack.template.json",
+        "packaging": "file"
+      },
+      "destinations": {
+        "025066243530-ap-southeast-1": {
+          "bucketName": "cdk-hnb659fds-assets-025066243530-ap-southeast-1",
+          "objectKey": "4626989e2ebaa068c8ac9d44e9cd5e38fbfc4aa82985686179070bbee29d16df.json",
+          "region": "ap-southeast-1",
+          "assumeRoleArn": "arn:${AWS::Partition}:iam::025066243530:role/cdk-hnb659fds-file-publishing-role-025066243530-ap-southeast-1"
+        }
+      }
+    }
+  },
+  "dockerImages": {}
+}

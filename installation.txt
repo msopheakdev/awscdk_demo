@@ -1,0 +1,20 @@
+install CDK
+
+pip install aws-cdk-lib
+
+cdk bootstrap aws://025066243530/ap-southeast-1
+
+pip install --upgrade pip
+
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+source ~/.nvm/nvm.sh
+
+nvm install 18
+
+nvm use 18
+
+cdk synth --app "python3 ec2.py"
+cdk deploy --app "python3 ec2.py"
+
+
+
